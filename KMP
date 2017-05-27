@@ -1,0 +1,32 @@
+#include <iostream>
+#define SIZE 128
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+int *tempArray(string P){
+    int index = 0;
+    int lps[P.length()];
+    int i;
+    for(i=1;i<P.length()){
+        if(P[index]==P[i]){
+            lps[i]=index+1;
+            index++;
+            i++;
+        }else{
+            if(index!=0){
+                index=lps[index-1];
+            }else{
+                lps[i]=0;
+                i++;
+            }
+        }
+    }
+    return lps;
+
+}
