@@ -1,0 +1,63 @@
+// Example program
+#include <iostream>
+#define SIZE 128
+
+using namespace std;
+void lasts(string );
+int last(char );
+int Min(int , int );
+int  booyrmore(string ,string );
+int alphabet[SIZE];
+int main()
+{
+    lasts("abd");
+    int x =booyrmore("abd","abcgsabsdfhgkabdr");
+    cout<<x<<endl;
+    return 0;
+}
+
+void lasts(string P){
+    int i;
+    int j;
+    for(i=0;i<SIZE;i++){
+        alphabet[i]=-1;
+    }
+
+    for(j=P.length()-1;j>=0;j--){
+        if(alphabet[(int)P[j]]==-1){
+            alphabet[(int)P[j]]=j;
+        }
+    }
+}
+
+int last(char c){
+    return alphabet[(int)c];
+}
+int Min(int a, int b){
+    return a<b ? a :b;
+}
+
+int booyrmore(string P,string T){
+    int n=T.length();
+    int m=P.length();
+    int i=m-1;
+    int j=m-1;
+
+    while(i<n-1){
+        if(P[j]==T[i]){
+            if(j==0){
+                return i;
+                break;
+
+            }else{
+                i=i-1;
+                j=j-1;
+            }
+        }else{
+            int y=Min(j,1+last(T[i]));
+            i+= m-y;
+            j=m-1;
+        }
+    }
+    return 0;
+}
