@@ -1,0 +1,70 @@
+#include <iostream>
+
+
+using namespace std;
+void tempArray(string P,int lps[]);
+int KMP(string P, string T,int* lps);
+int main()
+{
+    string T="abcdeabcdsbdnaadasd";
+    string p1 = "deabcd";
+    int lps[p1.length()];
+    tempArray(p1,lps);
+    
+    int x =KMP(p1,T,lps);
+    cout<<x<<endl;
+    return 0;
+    
+}
+
+void tempArray(string P,int lps[]){
+    int index = 0;
+    
+    lps[0]=0;
+    unsigned int i;
+    for(i=1;i<P.length();){
+        if(P[index]==P[i]){
+            lps[i]=index+1;
+            index++;
+            i++;
+        }else{
+            if(index!=0){
+                index=lps[index-1];
+            }else{
+                lps[i]=0;
+                i++;
+            }
+        }
+    }
+
+
+}
+
+int KMP(string P, string T,int* lps){
+    
+    
+    int n= T.length();
+    int m= P.length();
+    int i=0;
+    unsigned int j=0;
+    while(i<T.length() && j<P.length()){
+        if(P[j]==T[i]){
+            j=j+1;
+            i=i+1;
+        }else{
+            if(j!=0){
+                j = lps[j-1];
+
+            }else{
+                i++;
+            }
+        }
+    }
+    if(j==P.length()){
+        return 1;
+    }else{
+        return 0;    
+    }
+    
+
+}
